@@ -1,27 +1,24 @@
 // (c) Spyridon Zervos
 
+
 #pragma once
 
-#include <cmath>
-#include <vector>
 
 class BitstreamLibrary;
-class ComplexNumbersLibrary;
+class ComplexNumber;
 class PolarCoordinatesLibrary;
 
 class Modulation
 {
 public:
 
-    virtual short unsigned GetAlphabet() = 0;
+    short unsigned GetAlphabet();
 
-    virtual double GetSpectralEfficiency() = 0;
+    double GetSpectralEfficiency();
 
     virtual void GetModulationSymbols() = 0;
 
     virtual void ConstellationDiagram() = 0;
-
-    std::vector<ComplexNumbersLibrary> ModulationSymbols;
 
 protected:
 

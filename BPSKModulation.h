@@ -2,22 +2,23 @@
 
 #pragma once
 
-#include "IModulation.h"
+#include "Modulation.h"
+#include <vector>
+#include "ComplexNumbersLibrary.h"
 
 class BPSKModulation : public Modulation
 {
 private:
 
-    virtual short unsigned GetAlphabet() override;
-
     virtual void GetModulationSymbols() override;
 
     virtual void ConstellationDiagram() override;
 
+protected:
+
+    std::vector<ComplexNumber> ModulationSymbols;
+
 public:
 
-    BPSKModulation()
-    {
-        M = 2;
-    }
+    BPSKModulation();
 };
