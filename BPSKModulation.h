@@ -16,7 +16,7 @@ private:
 
 protected:
 
-    std::vector<ComplexNumber> ModulationSymbols;
+    
 
 public:
 

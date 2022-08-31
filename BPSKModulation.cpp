@@ -20,6 +20,4 @@ BPSKModulation::BPSKModulation()
 {
 	M = 2;
 	SpectralEfficiency = log2(M);
-	ModulationSymbols.emplace_back(ComplexNumber{-1, 0});
-	ModulationSymbols.emplace_back(ComplexNumber{1, 0});
 }

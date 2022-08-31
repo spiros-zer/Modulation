@@ -3,11 +3,6 @@
 
 #pragma once
 
-
-class BitstreamLibrary;
-class ComplexNumber;
-class PolarCoordinatesLibrary;
-
 class Modulation
 {
 public:
