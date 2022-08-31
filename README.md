@@ -1,6 +1,6 @@
 # Modulation
 
-### Implementation of various Modulation schemes (*currently supporting ~*)
+> Implementation of various Modulation schemes (*currently supporting ~*).
 
 ## Table of Contents
 ```
