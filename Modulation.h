@@ -3,15 +3,17 @@
 
 #pragma once
 
+class ComplexNumber;
+
 class Modulation
 {
 public:
 
-    short unsigned GetAlphabet();
+    short unsigned GetAlphabet() {return M;}
 
-    double GetSpectralEfficiency();
+    double GetSpectralEfficiency() {return SpectralEfficiency;}
 
-    virtual void GetModulationSymbols() = 0;
+    virtual ComplexNumber* GetModulationSymbols() = 0;
 
     virtual void ConstellationDiagram() = 0;
 
