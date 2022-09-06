@@ -3,7 +3,10 @@
 
 #pragma once
 
+#include <vector>
+
 class ComplexNumber;
+class Bitstream;
 
 class Modulation
 {
@@ -16,6 +19,8 @@ public:
     virtual ComplexNumber* GetModulationSymbols() = 0;
 
     virtual void ConstellationDiagram() = 0;
+
+    virtual void ConvertToSymbols(const Bitstream* InBitstream, std::vector<ComplexNumber>& OutSymbolstream) = 0;
 
 protected:
 

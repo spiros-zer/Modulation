@@ -5,7 +5,6 @@
 
 #include "ComplexNumber.h"
 #include "PSK.h"
-#include <vector>
 
 class BPSK : public PSK
 {
@@ -16,6 +15,8 @@ public:
     virtual ComplexNumber* GetModulationSymbols() override;
 
     virtual void ConstellationDiagram() override;
+
+    virtual void ConvertToSymbols(const Bitstream* InBitstream, std::vector<ComplexNumber>& OutSymbolstream) override;
 
 protected:
 

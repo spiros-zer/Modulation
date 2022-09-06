@@ -2,7 +2,7 @@
 
 
 #include "BPSK.h"
-
+#include "Bitstream.h"
 #include <cmath>
 
 ComplexNumber* BPSK::GetModulationSymbols()
@@ -11,6 +11,11 @@ ComplexNumber* BPSK::GetModulationSymbols()
 }
 
 void BPSK::ConstellationDiagram()
+{
+
+}
+
+void BPSK::ConvertToSymbols(const Bitstream* InBitstream, std::vector<ComplexNumber>& OutSymbolStream)
 {
 
 }
