@@ -4,6 +4,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 
 class ComplexNumber;
 class Bitstream;
@@ -12,15 +13,24 @@ class Modulation
 {
 public:
 
+    /**
+     * @brief Gets Name object.
+     * 
+     * @return The Name of the Modulation.
+     */
+    std::string GetModulationName() {return Name;}
+
     short unsigned GetAlphabet() {return M;}
 
     double GetSpectralEfficiency() {return SpectralEfficiency;}
 
     virtual ComplexNumber* GetModulationSymbols() = 0;
 
+    virtual void PrintModulationSymbols() = 0;
+
     virtual void ConstellationDiagram() = 0;
 
-    virtual void ConvertToSymbols(const Bitstream* InBitstream, std::vector<ComplexNumber>& OutSymbolstream) = 0;
+    virtual void ConvertToSymbols(Bitstream* InBitstream, std::vector<ComplexNumber>& OutSymbolstream) = 0;
 
 protected:
 
@@ -37,4 +47,9 @@ protected:
      * Spectral efficiency = log2(M).
      */
     double SpectralEfficiency;
+
+    /**
+     * @brief The name of the modulation scheme.
+     */
+    std::string Name;
 };

@@ -14,11 +14,14 @@ public:
 
     virtual ComplexNumber* GetModulationSymbols() override;
 
+    virtual void PrintModulationSymbols() override;
+
     virtual void ConstellationDiagram() override;
 
-    virtual void ConvertToSymbols(const Bitstream* InBitstream, std::vector<ComplexNumber>& OutSymbolstream) override;
+
+    virtual void ConvertToSymbols(Bitstream* InBitstream, std::vector<ComplexNumber>& OutSymbolstream) override;
 
 protected:
 
-    ComplexNumber ModulationSymbols[2] = { {1, 0}, {-1, 0} };
+    ComplexNumber ModulationSymbols[2] = { {-1, 0}, {1, 0} };
 };
