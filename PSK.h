@@ -16,4 +16,6 @@ public:
 	virtual void ConstellationDiagram() override {}
 
 	virtual void ConvertToSymbols(Bitstream* InBitstream, std::vector<ComplexNumber>& OutSymbolstream) override {}
+
+	virtual void ConvertToBinary(const std::vector<ComplexNumber>& OutSymbolstream, Bitstream& OutBitstream) override {}
 };

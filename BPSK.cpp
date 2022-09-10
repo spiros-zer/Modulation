@@ -29,13 +29,25 @@ void BPSK::ConstellationDiagram()
 void BPSK::ConvertToSymbols(Bitstream* InBitstream, std::vector<ComplexNumber>& OutSymbolStream)
 {
 	
-	for (const uint8_t& Bit : InBitstream->GetBitstream())
+	for (const uint8_t& Byte : InBitstream->GetBitstream())
 	{
-		for (int i = 0; i < 7; ++i)
+		std::cout << "Byte: " << std::hex << static_cast<int>(Byte) << "\n";
+		for (int i = 7; i >= 0; --i)
 		{
-			int bit = (Bit >> i) & 1;
-			std::cout << "Bit: " << bit << "to Symbol: " << ModulationSymbols[bit].ToString() << std::endl;
-			OutSymbolStream.emplace_back(ModulationSymbols[Bit]);
+			int bit = (Byte >> i) & 1;
+			std::cout << "bit: " << bit << " to Symbol: " << ModulationSymbols[bit].ToString() << std::endl;
+			OutSymbolStream.emplace_back(ModulationSymbols[bit]);
+		}
+	}
+}
+
+void BPSK::ConvertToBinary(const std::vector<ComplexNumber>& OutSymbolstream, Bitstream& OutBitstream)
+{
+	for (ComplexNumber Complex : OutSymbolstream)
+	{
+		if (Complex == ModulationSymbols[0])
+		{
+			
 		}
 	}
 }

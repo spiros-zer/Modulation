@@ -32,6 +32,8 @@ public:
 
     virtual void ConvertToSymbols(Bitstream* InBitstream, std::vector<ComplexNumber>& OutSymbolstream) = 0;
 
+    virtual void ConvertToBinary(const std::vector<ComplexNumber>& OutSymbolstream, Bitstream& OutBitstream) = 0;
+
 protected:
 
     /**

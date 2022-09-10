@@ -26,7 +26,7 @@ int main(int argc, char** argv)
 	BPSKModulation.ConvertToSymbols(&Bytes, Symbols);
 	for (const ComplexNumber& Symbol : Symbols)
 	{
-		std::cout << Symbol.ToString() << " ";
+		std::cout << Symbol.ToString() << "\t";
 	}
 	std::cout << std::endl;
 
