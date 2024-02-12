@@ -2,9 +2,10 @@
 
 
 #include "BPSK.h"
-#include "Bitstream.h"
+#include "Bitstreams/Bitstream.h"
 #include <cmath>
 #include <array>
+#include <iostream>
 
 ComplexNumber* BPSK::GetModulationSymbols()
 {
@@ -14,7 +15,7 @@ ComplexNumber* BPSK::GetModulationSymbols()
 void BPSK::PrintModulationSymbols()
 {
 	std::cout << "Modulation Symbols of " << Name << std::endl;
-	for (const ComplexNumber& Symbol : ModulationSymbols)
+	for (const ComplexNumbers& Symbol : ModulationSymbols)
 	{
 		std::cout << Symbol.ToString() << " ";
 	}

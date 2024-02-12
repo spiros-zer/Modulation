@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "ComplexNumber.h"
+#include "ComplexNumbers/ComplexNumbers.h"
 #include "PSK.h"
 
 class BPSK : public PSK
@@ -25,5 +25,5 @@ public:
 
 protected:
 
-    ComplexNumber ModulationSymbols[2] = { {-1, 0}, {1, 0} };
+    ComplexNumbers ModulationSymbols[2] = { {-1, 0}, {1, 0} };
 };
