@@ -20,7 +20,7 @@ void BPSK::ConvertToSymbols(Bitstream* InBitstream, std::vector<ComplexNumbers>&
 		for (int i = 7; i >= 0; --i)
 		{
 			int bit = (Byte >> i) & 1;
-			std::cout << "bit: " << bit << " to Symbol: " << ModulationSymbols[bit].ToString() << std::endl;
+			std::cout << "bit: " << bit << " to Symbol: " << ModulationSymbols[bit].ToString() << '\n';
 			OutSymbolStream.emplace_back(ModulationSymbols[bit]);
 		}
 	}
@@ -40,6 +40,7 @@ void BPSK::ConvertToBinary(const std::vector<ComplexNumbers>& OutSymbolstream, B
 void BPSK::PrintModulationSymbols()
 {
 	std::cout << "Modulation Symbols of " << GetModulationName() << '\n';
+	
 	for (const ComplexNumbers& Symbol : ModulationSymbols)
 	{
 		std::cout << Symbol.ToString() << " ";
