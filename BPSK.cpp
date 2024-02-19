@@ -7,45 +7,9 @@
 #include <array>
 #include <iostream>
 
-// Initialize the static instance
-BPSK BPSK::instance;
-
-// Define the function to get the instance of the singleton
-BPSK& BPSK::GetBPSKSystem() {
-	return instance;
-}
-
-// Private constructor
-BPSK::BPSK() {
-	SetAlphabetSize(2);
-	SetSpectralEfficiency(log2(GetAlphabetSize()));
-	SetModulationName("BPSK");
-}
-
-// Private destructor
-BPSK::~BPSK() {
-	// Cleanup code, if any
-}
-
-// ComplexNumbers* BPSK::GetModulationSymbols()
-// {
-// 	return ModulationSymbols;
-// }
-
-void BPSK::PrintModulationSymbols()
-{
-	std::cout << "Modulation Symbols of " << GetModulationName() << '\n';
-	for (const ComplexNumbers& Symbol : ModulationSymbols)
-	{
-		std::cout << Symbol.ToString() << " ";
-	}
-	std::cout << '\n';
-}
-
-void BPSK::ConstellationDiagram()
-{
-
-}
+/******** SINGLETON INIT ********/
+BPSK BPSK::BPSKSystem_;
+/********************************/
 
 void BPSK::ConvertToSymbols(Bitstream* InBitstream, std::vector<ComplexNumbers>& OutSymbolStream)
 {
@@ -73,3 +37,26 @@ void BPSK::ConvertToBinary(const std::vector<ComplexNumbers>& OutSymbolstream, B
 	}
 }
 
+void BPSK::PrintModulationSymbols()
+{
+	std::cout << "Modulation Symbols of " << GetModulationName() << '\n';
+	for (const ComplexNumbers& Symbol : ModulationSymbols)
+	{
+		std::cout << Symbol.ToString() << " ";
+	}
+	std::cout << '\n';
+}
+
+BPSK::BPSK()
+{
+	SetAlphabetSize(2);
+	SetSpectralEfficiency(log2(GetAlphabetSize()));
+	SetModulationName("BPSK");
+	ModulationSymbols.emplace_back(0, 0);
+	ModulationSymbols.emplace_back(1, 0);
+}
+
+BPSK::~BPSK()
+{
+	// Cleanup code, if any
+}

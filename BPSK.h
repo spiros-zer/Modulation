@@ -10,32 +10,33 @@ class BPSK : public PSK
 {
 public:
 
-    /**** GETTERS/SETTERS */
-    /** @brief Singleton Getter */
-    static BPSK& GetBPSKSystem();
+    /******** GETTERS ********/
     
-    /**** CORE */
+    /** @brief Singleton Getter */
+    static BPSK& GetBPSKSystem() {return BPSKSystem_;}
+    
+    /******* DATA CONVERSION ********/
+    
     void ConvertToSymbols(Bitstream* InBitstream, std::vector<ComplexNumbers>& OutSymbolstream) override;
 
     void ConvertToBinary(const std::vector<ComplexNumbers>& OutSymbolstream, Bitstream& OutBitstream) override;
 
-    /**** COSMETIC */
-    // ComplexNumbers* GetModulationSymbols() override;
+    /******** COSMETIC *******/
 
     void PrintModulationSymbols() override;
-
-    void ConstellationDiagram() override;
-
-    ComplexNumbers ModulationSymbols[2] = { {-1, 0}, {1, 0} };
 
 private:
 
     /** @brief Singleton instance */
-    static BPSK instance;
+    static BPSK BPSKSystem_;
 
-    /**** CONSTRUCTORS/DESTRUCTORS */
+    /******** CONSTRUCTORS/DESTRUCTORS ********/
+    
     BPSK();
-    ~BPSK();
+    
     BPSK(const BPSK&) = delete;
+    
+    ~BPSK() override;
+    
     BPSK& operator=(const BPSK&) = delete;    
 };
