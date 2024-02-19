@@ -1,30 +1,50 @@
-# Modulation
+<header>
+  <h2>Modulation</h2>
+  <p>Custom implementation of Modulation schemes in C++.</p>
+</header>
 
-> Implementation of various Modulation schemes *currently supporting NONE*.
+<div> 
+  <h2>Functionality</h2>
+  <p><strong>Current state</strong> supports PSK, BPSK.</p>
+</div>
 
-## Table of Contents
-```
-1. Summary
-2. Compilation of project
-3. Useful Links
-```
-## Summary
-All of the Modulations are derived from the Modulation Abstract class [and not Interface](https://cplusplus.com/forum/beginner/157568/) and differentiate depending on each Modulation scheme's prerequisites.
+<h2>ModulationBase</h2>
+<p>The base entity of the modulation schemes. All the schemes derive from <strong>ModulationBase.h</strong>. Implementation can be found in Modulationbase.cpp</p>
 
-## Compilation of project
-> To compile use the following commands:
+```C++
+class ModulationBase
 ```
-mkdir obj 
-```
-> Make a directory to place the produced .obj s.
-```
-cl /c *.cpp /I C:\Users\spiro\Documents\Projects\ComplexNumbers /Fo".\obj\\"
-```
-> Compile all the .cpp in the current directory and put the produced .obj s in the obj directory.
-```
-link .\obj\*.obj
-```
-> Link the produced .obj s to create the .exe
-> For further information on compiling options and capabilities see [compile to a DLL](https://medium.com/ai-innovation/how-to-create-c-c-dynamic-link-libraries-in-windows-28abefc988c9), [cl and link commands](https://docs.microsoft.com/en-us/cpp/build/reference/c-compile-without-linking?view=msvc-170)
 
-## Useful Links
+<p>Defines base modulation features</p>
+
+```C++
+/** @brief The Alphabet Size (M) of the modulation. */
+short unsigned AlphabetSize_{};
+
+/** @brief Information rate that can be transmitted over a given bandwidth = log2(M). */
+double SpectralEfficiency_{};
+
+/** @brief The name of the modulation scheme. */
+std::string ModulationName_;
+```
+
+<p>Core functions</p>
+
+```C++
+virtual void ConvertToSymbols(Bitstream* InBitstream, std::vector<ComplexNumber>& OutSymbolstream) = 0;
+
+virtual void ConvertToBinary(const std::vector<ComplexNumber>& OutSymbolstream, Bitstream& OutBitstream) = 0;
+```
+
+<p>Other functions</p>
+
+```C++
+virtual void PrintModulationSymbols() = 0;
+
+virtual void ConstellationDiagram() = 0;
+```
+
+<footer>
+  <h2>Dependencies</h2>
+  <p>This library uses the <a href="https://github.com/spiros-zer/ComplexNumbers">ComplexNumbers</a> and the <a href="https://github.com/spiros-zer/Bitstream">Bitstream</a> library. A <em>testbed</em> is offered where the capabilities of the CartesianCoordinates2D library can be tested in the <a href="https://github.com/spiros-zer/Testbed">Testbed</a> repository. </p>
+</footer>

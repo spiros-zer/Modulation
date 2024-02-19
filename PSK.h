@@ -9,13 +9,14 @@ class PSK : public Modulation
 {
 public:
 
-	virtual ComplexNumber* GetModulationSymbols() override { return nullptr; }
+	
+	void ConvertToSymbols(Bitstream* InBitstream, std::vector<ComplexNumbers>& OutSymbolstream) override {}
 
-	virtual void PrintModulationSymbols() override {}
+	void ConvertToBinary(const std::vector<ComplexNumbers>& OutSymbolstream, Bitstream& OutBitstream) override {}
 
-	virtual void ConstellationDiagram() override {}
+	// virtual ComplexNumbers* GetModulationSymbols() { return nullptr; }
 
-	virtual void ConvertToSymbols(Bitstream* InBitstream, std::vector<ComplexNumber>& OutSymbolstream) override {}
+	void PrintModulationSymbols() override {}
 
-	virtual void ConvertToBinary(const std::vector<ComplexNumber>& OutSymbolstream, Bitstream& OutBitstream) override {}
+	void ConstellationDiagram() override {}
 };

@@ -7,19 +7,39 @@
 #include <array>
 #include <iostream>
 
-ComplexNumber* BPSK::GetModulationSymbols()
-{
-	return ModulationSymbols;
+// Initialize the static instance
+BPSK BPSK::instance;
+
+// Define the function to get the instance of the singleton
+BPSK& BPSK::GetBPSKSystem() {
+	return instance;
 }
+
+// Private constructor
+BPSK::BPSK() {
+	SetAlphabetSize(2);
+	SetSpectralEfficiency(log2(GetAlphabetSize()));
+	SetModulationName("BPSK");
+}
+
+// Private destructor
+BPSK::~BPSK() {
+	// Cleanup code, if any
+}
+
+// ComplexNumbers* BPSK::GetModulationSymbols()
+// {
+// 	return ModulationSymbols;
+// }
 
 void BPSK::PrintModulationSymbols()
 {
-	std::cout << "Modulation Symbols of " << Name << std::endl;
+	std::cout << "Modulation Symbols of " << GetModulationName() << '\n';
 	for (const ComplexNumbers& Symbol : ModulationSymbols)
 	{
 		std::cout << Symbol.ToString() << " ";
 	}
-	std::cout << std::endl;
+	std::cout << '\n';
 }
 
 void BPSK::ConstellationDiagram()
@@ -27,7 +47,7 @@ void BPSK::ConstellationDiagram()
 
 }
 
-void BPSK::ConvertToSymbols(Bitstream* InBitstream, std::vector<ComplexNumber>& OutSymbolStream)
+void BPSK::ConvertToSymbols(Bitstream* InBitstream, std::vector<ComplexNumbers>& OutSymbolStream)
 {
 	
 	for (const uint8_t& Byte : InBitstream->GetBitstream())
@@ -42,9 +62,9 @@ void BPSK::ConvertToSymbols(Bitstream* InBitstream, std::vector<ComplexNumber>& 
 	}
 }
 
-void BPSK::ConvertToBinary(const std::vector<ComplexNumber>& OutSymbolstream, Bitstream& OutBitstream)
+void BPSK::ConvertToBinary(const std::vector<ComplexNumbers>& OutSymbolstream, Bitstream& OutBitstream)
 {
-	for (ComplexNumber Complex : OutSymbolstream)
+	for (ComplexNumbers Complex : OutSymbolstream)
 	{
 		if (Complex == ModulationSymbols[0])
 		{
@@ -53,9 +73,3 @@ void BPSK::ConvertToBinary(const std::vector<ComplexNumber>& OutSymbolstream, Bi
 	}
 }
 
-BPSK::BPSK()
-{
-	M = 2;
-	SpectralEfficiency = log2(M);
-	Name = "BPSK";
-}
