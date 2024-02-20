@@ -4,7 +4,6 @@
 #include "BPSK.h"
 #include "Bitstreams/Bitstream.h"
 #include <cmath>
-#include <array>
 #include <iostream>
 
 /******** SINGLETON INIT ********/
@@ -13,7 +12,6 @@ BPSK BPSK::BPSKSystem_;
 
 void BPSK::ConvertToSymbols(Bitstream* InBitstream, std::vector<ComplexNumbers>& OutSymbolStream)
 {
-	
 	for (const uint8_t& Byte : InBitstream->GetBitstream())
 	{
 		std::cout << "Byte: " << std::hex << static_cast<int>(Byte) << "\n";
@@ -26,14 +24,11 @@ void BPSK::ConvertToSymbols(Bitstream* InBitstream, std::vector<ComplexNumbers>&
 	}
 }
 
-void BPSK::ConvertToBinary(const std::vector<ComplexNumbers>& OutSymbolstream, Bitstream& OutBitstream)
+void BPSK::ConvertToBinary(const std::vector<ComplexNumbers>& Symbolstream, Bitstream& OutBitstream)
 {
-	for (ComplexNumbers Complex : OutSymbolstream)
+	for (const ComplexNumbers& Symbol : Symbolstream)
 	{
-		if (Complex == ModulationSymbols[0])
-		{
-			
-		}
+		OutBitstream.GetBitstream().emplace_back(Symbol == ModulationSymbols[0] ? 0 : 1);
 	}
 }
 
