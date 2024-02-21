@@ -12,14 +12,15 @@ public:
 
     /******** GETTERS ********/
     
-    /** @brief Singleton Getter */
     static BPSK& GetBPSKSystem() {return BPSKSystem_;}
     
-    /******* DATA CONVERSION ********/
+    /******* MODULATION ********/
     
     void ConvertToSymbols(Bitstream* InBitstream, std::vector<ComplexNumbers>& OutSymbolstream) override;
 
-    void ConvertToBinary(const std::vector<ComplexNumbers>& OutSymbolstream, Bitstream& OutBitstream) override;
+    /******* DEMODULATION ********/
+    
+    void ConvertToBinary(const std::vector<ComplexNumbers>& Symbolstream, Bitstream& OutBitstream) override;
 
     /******** COSMETIC *******/
 

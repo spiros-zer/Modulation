@@ -6,6 +6,8 @@
 #include <cmath>
 #include <iostream>
 
+#include "CartesianCoordinates/CartesianCoordinates2D.h"
+
 /******** SINGLETON INIT ********/
 BPSK BPSK::BPSKSystem_;
 /********************************/
@@ -14,11 +16,11 @@ void BPSK::ConvertToSymbols(Bitstream* InBitstream, std::vector<ComplexNumbers>&
 {
 	for (const uint8_t& Byte : InBitstream->GetBitstream())
 	{
-		std::cout << "Byte: " << std::hex << static_cast<int>(Byte) << "\n";
+		// std::cout << "Byte: " << std::hex << static_cast<int>(Byte) << "\n";
 		for (int i = 7; i >= 0; --i)
 		{
-			int bit = (Byte >> i) & 1;
-			std::cout << "bit: " << bit << " to Symbol: " << ModulationSymbols[bit].ToString() << '\n';
+			const int bit = (Byte >> i) & 1;
+			// std::cout << "bit: " << bit << " to Symbol: " << ModulationSymbols[bit].ToString() << '\n';
 			OutSymbolStream.emplace_back(ModulationSymbols[bit]);
 		}
 	}
@@ -26,9 +28,19 @@ void BPSK::ConvertToSymbols(Bitstream* InBitstream, std::vector<ComplexNumbers>&
 
 void BPSK::ConvertToBinary(const std::vector<ComplexNumbers>& Symbolstream, Bitstream& OutBitstream)
 {
+	uint8_t Byte{0};
+	size_t BitPosition{0};
 	for (const ComplexNumbers& Symbol : Symbolstream)
 	{
-		OutBitstream.GetBitstream().emplace_back(Symbol == ModulationSymbols[0] ? 0 : 1);
+		const uint8_t Value = Symbol.Complex->GetX() >= 0.5 ? 1 : 0;
+		Byte |= Value << (7 - BitPosition++);
+
+		if (BitPosition == 8)
+		{
+			OutBitstream.AddByte(Byte);
+			Byte = 0;
+			BitPosition = 0;
+		}
 	}
 }
 
